@@ -3,7 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/moony/AndroidStudioProjects/DPectrum/app/src/main/res/layout/activity_main.xml" value="0.17" />
+        <entry key="..\:/Users/moony/AndroidStudioProjects/DPectrum/app/src/main/res/drawable/edittext_rectangle_round.xml" value="0.1935" />
+        <entry key="..\:/Users/moony/AndroidStudioProjects/DPectrum/app/src/main/res/layout/activity_main.xml" value="0.12" />
+        <entry key="..\:/Users/moony/AndroidStudioProjects/DPectrum/app/src/main/res/layout/fragment_forgot_password.xml" value="0.184375" />
+        <entry key="..\:/Users/moony/AndroidStudioProjects/DPectrum/app/src/main/res/layout/fragment_home.xml" value="0.184375" />
+        <entry key="..\:/Users/moony/AndroidStudioProjects/DPectrum/app/src/main/res/layout/fragment_login.xml" value="0.22" />
+        <entry key="..\:/Users/moony/AndroidStudioProjects/DPectrum/app/src/main/res/layout/fragment_password_certification.xml" value="0.184375" />
+        <entry key="..\:/Users/moony/AndroidStudioProjects/DPectrum/app/src/main/res/layout/fragment_sign_up.xml" value="0.184375" />
+        <entry key="..\:/Users/moony/AndroidStudioProjects/DPectrum/app/src/main/res/layout/fragment_sign_up_certification.xml" value="0.18" />
+        <entry key="..\:/Users/moony/AndroidStudioProjects/DPectrum/app/src/main/res/layout/fragment_splash.xml" value="0.184375" />
+        <entry key="..\:/Users/moony/AndroidStudioProjects/DPectrum/app/src/main/res/layout/source_custom_confirm_edit_text.xml" value="0.15" />
       </map>
     </option>
   </component>
