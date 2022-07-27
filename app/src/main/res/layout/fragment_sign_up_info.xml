@@ -1,6 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    >
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/fragment_sign_up_info_left_guid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05"
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/fragment_sign_up_info_right_guid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95"
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/fragment_sign_up_info_content_line_guid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.25"
+        />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/fragment_sign_up_info_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/white"/>
+
+    <TextView
+        android:id="@+id/fragment_sign_up_info_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/fragment_sign_up_info_toolbar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/fragment_sign_up_info_content_line_guid"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:text="회원 가입"
+        />
+    <com.example.dpectrum.customView.ConfirmEditText
+        android:id="@+id/fragment_sign_up_info_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/fragment_sign_up_info_content_line_guid"
+        app:layout_constraintLeft_toLeftOf="@id/fragment_sign_up_info_left_guid"
+        app:layout_constraintRight_toRightOf="@id/fragment_sign_up_info_right_guid"
+        app:layout_constraintBottom_toTopOf="@id/fragment_sign_up_info_school"
+        app:custom_confirmEdittext_title="*이름"
+        app:custom_confirmEdittext_hint="이름 입력"
+        />
+    <com.example.dpectrum.customView.ConfirmEditText
+        android:id="@+id/fragment_sign_up_info_school"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/fragment_sign_up_info_name"
+        app:layout_constraintLeft_toLeftOf="@id/fragment_sign_up_info_left_guid"
+        app:layout_constraintRight_toRightOf="@id/fragment_sign_up_info_right_guid"
+        app:layout_constraintBottom_toTopOf="@id/fragment_sign_up_info_password"
+        app:custom_confirmEdittext_title="*학교"
+        app:custom_confirmEdittext_hint="학교명 입력"
+        />
+    <com.example.dpectrum.customView.ConfirmEditText
+        android:id="@+id/fragment_sign_up_info_password"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/fragment_sign_up_info_school"
+        app:layout_constraintLeft_toLeftOf="@id/fragment_sign_up_info_left_guid"
+        app:layout_constraintRight_toRightOf="@id/fragment_sign_up_info_right_guid"
+        app:layout_constraintBottom_toTopOf="@id/fragment_sign_up_info_password_cer"
+        app:custom_confirmEdittext_title="*비밀번호"
+        app:custom_confirmEdittext_hint="영문, 한글, 숫자, 특수문자 포함 8자"
+        />
+    <com.example.dpectrum.customView.ConfirmEditText
+        android:id="@+id/fragment_sign_up_info_password_cer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/fragment_sign_up_info_password"
+        app:layout_constraintLeft_toLeftOf="@id/fragment_sign_up_info_left_guid"
+        app:layout_constraintRight_toRightOf="@id/fragment_sign_up_info_right_guid"
+        app:custom_confirmEdittext_title="*비밀번호 확인"
+        app:custom_confirmEdittext_hint="비밀번호 재입력"
+        />
+
+    <CheckBox
+        android:id="@+id/fragment_sign_up_info_term_service"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@id/fragment_sign_up_info_left_guid"
+        app:layout_constraintTop_toBottomOf="@id/fragment_sign_up_info_password_cer"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/fragment_sign_up_info_term_service"
+        app:layout_constraintTop_toTopOf="@id/fragment_sign_up_info_term_service"
+        app:layout_constraintBottom_toBottomOf="@id/fragment_sign_up_info_term_service"
+        android:layout_marginStart="10dp"
+        android:text="공공화실의 이용 약관에 동의합니다."
+        />
+
+    <CheckBox
+        android:id="@+id/fragment_sign_up_info_term_privacy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@id/fragment_sign_up_info_left_guid"
+        app:layout_constraintTop_toBottomOf="@id/fragment_sign_up_info_term_service"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/fragment_sign_up_info_term_privacy"
+        app:layout_constraintTop_toTopOf="@id/fragment_sign_up_info_term_privacy"
+        app:layout_constraintBottom_toBottomOf="@id/fragment_sign_up_info_term_privacy"
+        android:layout_marginStart="10dp"
+        android:text="개인정보처리방침에 동의합니다."
+        />
+
+
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@color/black"
+        android:text="회원 가입"
+        android:textColor="@color/white"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

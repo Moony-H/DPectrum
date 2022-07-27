@@ -31,14 +31,19 @@
         app:layout_constraintGuide_percent="0.95"
         />
 
+
+
     <ImageView
         android:id="@+id/fragment_login_main_image"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/fragment_login_guid_image"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:src="@drawable/ic_launcher_background"
+        android:src="@drawable/logo"
+        android:adjustViewBounds="true"
+        android:layout_marginStart="100dp"
+        android:layout_marginEnd="100dp"
         />
 
     <com.example.dpectrum.customView.ConfirmEditText
@@ -50,6 +55,7 @@
         app:layout_constraintRight_toRightOf="@id/fragment_login_guid_right"
         app:custom_confirmEdittext_title="휴대폰 번호"
         app:custom_confirmEdittext_hint="아이디 입력"
+        android:layout_marginTop="80dp"
         />
 
     <com.example.dpectrum.customView.ConfirmEditText
@@ -110,5 +116,7 @@
         android:text="로그인"
         android:textColor="@color/white"
         />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
