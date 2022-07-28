@@ -59,6 +59,7 @@
         app:layout_constraintBottom_toTopOf="@id/fragment_sign_up_info_school"
         app:custom_confirmEdittext_title="*이름"
         app:custom_confirmEdittext_hint="이름 입력"
+        android:maxLength="10"
         />
     <com.example.dpectrum.customView.ConfirmEditText
         android:id="@+id/fragment_sign_up_info_school"
@@ -70,6 +71,7 @@
         app:layout_constraintBottom_toTopOf="@id/fragment_sign_up_info_password"
         app:custom_confirmEdittext_title="*학교"
         app:custom_confirmEdittext_hint="학교명 입력"
+        android:maxLength="10"
         />
     <com.example.dpectrum.customView.ConfirmEditText
         android:id="@+id/fragment_sign_up_info_password"
@@ -81,6 +83,8 @@
         app:layout_constraintBottom_toTopOf="@id/fragment_sign_up_info_password_cer"
         app:custom_confirmEdittext_title="*비밀번호"
         app:custom_confirmEdittext_hint="영문, 한글, 숫자, 특수문자 포함 8자"
+        android:maxLength="20"
+        android:inputType="textPassword"
         />
     <com.example.dpectrum.customView.ConfirmEditText
         android:id="@+id/fragment_sign_up_info_password_cer"
@@ -91,6 +95,8 @@
         app:layout_constraintRight_toRightOf="@id/fragment_sign_up_info_right_guid"
         app:custom_confirmEdittext_title="*비밀번호 확인"
         app:custom_confirmEdittext_hint="비밀번호 재입력"
+        android:maxLength="20"
+        android:inputType="textPassword"
         />
 
     <CheckBox
@@ -129,6 +135,7 @@
 
 
     <Button
+        android:id="@+id/fragment_sign_up_info_sign_up_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"

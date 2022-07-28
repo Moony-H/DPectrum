@@ -1,6 +1,7 @@
 package com.example.dpectrum
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import androidx.activity.addCallback
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
@@ -16,6 +18,13 @@ import androidx.navigation.fragment.findNavController
 import com.example.dpectrum.databinding.FragmentLoginBinding
 import com.example.dpectrum.databinding.FragmentPasswordCertificationBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody
 import kotlin.system.exitProcess
 
 @AndroidEntryPoint
@@ -48,6 +57,8 @@ class LoginFragment:Fragment(),View.OnClickListener{
                 exitProcess(0)
             }
         }
+
+
         return binding.root
     }
 

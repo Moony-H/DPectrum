@@ -58,6 +58,10 @@
         app:layout_constraintLeft_toLeftOf="@id/fragment_sign_up_cer_left_guid"
         app:layout_constraintRight_toLeftOf="@id/fragment_sign_up_cer_cer_button"
         app:layout_constraintBottom_toTopOf="@id/fragment_sign_up_cer_cer_number"
+        app:custom_confirmEdittext_title="휴대폰 번호"
+        app:custom_confirmEdittext_hint="-없이 숫자만 입력"
+        android:inputType="number"
+        android:maxLength="11"
         />
     <Button
         android:id="@+id/fragment_sign_up_cer_cer_button"
@@ -78,8 +82,13 @@
         app:layout_constraintLeft_toLeftOf="@id/fragment_sign_up_cer_left_guid"
         app:layout_constraintRight_toRightOf="@id/fragment_sign_up_cer_right_guid"
         app:layout_constraintBottom_toBottomOf="@id/fragment_sign_up_cer_middle_guid"
+        app:custom_confirmEdittext_title="인증번호"
+        app:custom_confirmEdittext_hint="인증번호는 123123 입력하면 인증가능"
+        android:inputType="number"
+        android:maxLength="6"
         />
     <Button
+        android:id="@+id/fragment_sign_up_cer_next_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"

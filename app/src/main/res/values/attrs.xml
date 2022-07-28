@@ -3,5 +3,7 @@
     <declare-styleable name="ConfirmEditText">
         <attr name="custom_confirmEdittext_title" format="string"/>
         <attr name="custom_confirmEdittext_hint" format="string"/>
+        <attr name="android:inputType"/>
+        <attr name="android:maxLength"/>
     </declare-styleable>
 </resources>

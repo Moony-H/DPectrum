@@ -2,10 +2,12 @@ package com.example.dpectrum.customView
 
 import android.content.Context
 import android.text.Editable
+import android.text.InputFilter
 import android.text.TextWatcher
 import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.inputmethod.EditorInfo
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.dpectrum.R
 import com.example.dpectrum.databinding.SourceCustomConfirmEditTextBinding
@@ -14,7 +16,7 @@ class ConfirmEditText:ConstraintLayout {
 
     private lateinit var binding: SourceCustomConfirmEditTextBinding
     private var edittextCondition= {_:String->true}
-    private var isError=true
+    private var isConfirm=true
 
     constructor(context: Context) : super(context) {
         init()
@@ -34,6 +36,14 @@ class ConfirmEditText:ConstraintLayout {
             hint?.let {
                 binding.sourceCustomConfirmContent.hint = it
             }
+            val type=typeArray.getInt(R.styleable.ConfirmEditText_android_inputType,EditorInfo.TYPE_NULL)
+            if(type!=EditorInfo.TYPE_NULL)
+                binding.sourceCustomConfirmContent.inputType=type
+
+            val maxLength=typeArray.getInt(R.styleable.ConfirmEditText_android_maxLength,100)
+
+            val editText = binding.sourceCustomConfirmContent
+            editText.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(maxLength))
 
             typeArray.recycle()
         }
@@ -45,7 +55,7 @@ class ConfirmEditText:ConstraintLayout {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun afterTextChanged(p0: Editable?) {}
             override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                isError=edittextCondition(text.toString())
+                isConfirm=edittextCondition(text.toString())
             }
         })
     }
@@ -62,8 +72,8 @@ class ConfirmEditText:ConstraintLayout {
         edittextCondition=condition
     }
 
-    fun getErrorState():Boolean{
-        return isError
+    fun getConfirmState():Boolean{
+        return isConfirm
     }
 
 }
