@@ -32,6 +32,7 @@ class SignUpCertificationFragment: Fragment(),View.OnClickListener {
         binding.fragmentSignUpCerNextButton.setOnClickListener(this)
         binding.fragmentSignUpCerCerButton.setOnClickListener(this)
 
+        Log.d("test","sign up $signUpViewModel")
         binding.fragmentSignUpCerPhoneNumber.setEdittextContentErrorCondition {
             if(it.isEmpty()){
                 binding.fragmentSignUpCerPhoneNumber.setErrorMessage("")
@@ -78,7 +79,7 @@ class SignUpCertificationFragment: Fragment(),View.OnClickListener {
                 if(cerButtonClicked){
                     if(binding.fragmentSignUpCerCerNumber.getEdittextContent()=="123123"){
                         Navigation.findNavController(binding.root).navigate(R.id.action_signUpCerFragment_to_signUpInfoFragment)
-                        signUpViewModel.setSignUpBody(SignUpBody("",binding.fragmentSignUpCerPhoneNumber.getEdittextContent(),"",""))
+                        signUpViewModel.phoneNumber=binding.fragmentSignUpCerPhoneNumber.getEdittextContent()
                     } else{
                         binding.fragmentSignUpCerCerNumber.setErrorMessage("인증번호가 올바르지 않습니다.")
                     }

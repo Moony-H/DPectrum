@@ -1,6 +1,7 @@
 package com.example.dpectrum
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -33,7 +34,7 @@ class SignUpInfoFragment: Fragment() {
         _binding= FragmentSignUpInfoBinding.inflate(inflater,container,false)
 
         //toolbar setting
-
+        Log.d("test","sign up $signUpViewModel")
         val toolbar = binding.fragmentSignUpInfoToolbar
         toolbar.setNavigationIcon(R.drawable.arrow_back_48px)
         toolbar.setNavigationOnClickListener {
@@ -41,13 +42,11 @@ class SignUpInfoFragment: Fragment() {
         }
 
         //args
-        val info=SignUpBody(
-            "",
-            args.phone,
-            "",
-            ""
-        )
-        signUpViewModel.setSignUpBody(info)
+        if(args.phone!=""){
+            signUpViewModel.phoneNumber=args.phone
+        }
+
+
 
         binding.fragmentSignUpInfoName.setEdittextContentErrorCondition(confirmEditTextCondition)
         binding.fragmentSignUpInfoSchool.setEdittextContentErrorCondition(confirmEditTextCondition)
@@ -65,14 +64,13 @@ class SignUpInfoFragment: Fragment() {
 
             if(checkAllConfirmEditText()){
                 if(binding.fragmentSignUpInfoTermService.isChecked && binding.fragmentSignUpInfoTermPrivacy.isChecked){
-                    val info=SignUpBody(
+                    val signUpBody=SignUpBody(
                         binding.fragmentSignUpInfoPassword.getEdittextContent(),
-                        signUpViewModel.memberInfo.value!!.phoneNumber,
+                        signUpViewModel.phoneNumber,
                         binding.fragmentSignUpInfoName.getEdittextContent(),
                         binding.fragmentSignUpInfoSchool.getEdittextContent()
                     )
-                    signUpViewModel.setSignUpBody(info)
-                    signUpViewModel.signUp()
+                    signUpViewModel.signUp(signUpBody)
                 }else{
                     Util.openBasicDialog(context,layoutInflater,"안내","이용약관과 개인정보처리방침에\n 동의해 주세요")
                 }

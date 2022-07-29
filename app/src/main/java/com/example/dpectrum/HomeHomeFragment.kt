@@ -62,9 +62,6 @@ class HomeHomeFragment:Fragment() {
             adapter.submitList(it)
         }
 
-        viewModel.allContents.observe(viewLifecycleOwner){
-
-        }
 
 
         return binding.root
@@ -72,12 +69,13 @@ class HomeHomeFragment:Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        _binding=null
+        //_binding=null
     }
 
     private val listener=object : AdapterView.OnItemSelectedListener {
-        override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+        override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
             val selected= mutableListOf<TutorContent>()
+            Log.d("position","$position")
             if(position==0){
                 viewModel.allContents.value?.let { viewModel.setSortedContents(it) }
             }else{
