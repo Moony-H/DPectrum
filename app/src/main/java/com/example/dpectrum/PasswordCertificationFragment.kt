@@ -42,11 +42,30 @@ class PasswordCertificationFragment:Fragment(),View.OnClickListener {
         when(view){
             binding.fragmentPasswordCerCerButton->{
                 Log.d("PasswordCertificationFragment","certification button clicked")
+                val phone=binding.fragmentPasswordCerPhoneNumber
+                if(phone.getEdittextContent()==""){
+                    phone.setErrorMessage("휴대폰번호를 입력하세요")
+                    phone.setConfirmState(false)
+                }else if(!phone.getEdittextContent().matches("""^(?=.*[0-9]).{11,20}""".toRegex())){
+                    phone.setErrorMessage("핸드폰 번호가 올바르지 않습니다.")
+                    phone.setConfirmState(false)
+                }else{
+                    phone.setErrorMessage("인증번호가 전송되었습니다.")
+                    phone.setConfirmState(true)
+                }
             }
 
             binding.fragmentPasswordCerNextButton->{
                 Log.d("PasswordCertificationFragment","next button clicked")
-                Navigation.findNavController(binding.root).navigate(R.id.action_passwordCerFragment_to_passwordNewFragment)
+                if(!binding.fragmentPasswordCerPhoneNumber.getConfirmState()){
+                    binding.fragmentPasswordCerPhoneNumber.setErrorMessage("핸드폰 번호를 인증해주세요")
+
+                }else if(binding.fragmentPasswordCerCerNumber.getEdittextContent()!="123123"){
+                    binding.fragmentPasswordCerCerNumber.setErrorMessage("인증번호가 올바르지 않습니다.")
+                }else{
+                    Navigation.findNavController(binding.root).navigate(R.id.action_passwordCerFragment_to_passwordNewFragment)
+                }
+
             }
         }
     }

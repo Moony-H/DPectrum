@@ -16,7 +16,7 @@ class ConfirmEditText:ConstraintLayout {
 
     private lateinit var binding: SourceCustomConfirmEditTextBinding
     private var edittextCondition= {_:String->true}
-    private var isConfirm=true
+    private var isConfirm=false
 
     constructor(context: Context) : super(context) {
         init()
@@ -74,6 +74,10 @@ class ConfirmEditText:ConstraintLayout {
 
     fun getConfirmState():Boolean{
         return isConfirm
+    }
+
+    fun setConfirmState(state:Boolean){
+        isConfirm=state
     }
 
 }

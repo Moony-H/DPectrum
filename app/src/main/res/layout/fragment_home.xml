@@ -44,6 +44,8 @@
         app:layout_constraintLeft_toLeftOf="@id/fragment_home_left_guid"
         app:layout_constraintRight_toRightOf="@id/fragment_home_right_guid"
         />
+
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/fragment_home_bottom_navigation_view"
         android:layout_width="0dp"

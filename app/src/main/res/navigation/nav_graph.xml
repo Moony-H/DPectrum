@@ -11,29 +11,9 @@
         >
         <action
             android:id="@+id/action_splashFragment_to_loginFragment"
-            app:destination="@id/loginFragment"
+            app:destination="@id/loginAndHomeNavigation"
             />
     </fragment>
-    <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.example.dpectrum.LoginFragment"
-        tools:layout="@layout/fragment_login"
-        >
-        <action
-            android:id="@+id/action_loginFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-        <action
-            android:id="@+id/action_loginFragment_to_passwordCerFragment"
-            app:destination="@id/findPasswordNavigation" />
-        <action
-            android:id="@+id/action_loginFragment_to_signUpCerFragment"
-            app:destination="@id/signUpNavigation" />
-    </fragment>
-    <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.example.dpectrum.HomeFragment"
-        tools:layout="@layout/fragment_home"
-        />
     <navigation android:id="@+id/signUpNavigation"
         app:startDestination="@id/signUpCerFragment">
         <fragment
@@ -48,9 +28,12 @@
             android:id="@+id/signUpInfoFragment"
             android:name="com.example.dpectrum.SignUpInfoFragment"
             tools:layout="@layout/fragment_sign_up_info">
+            <argument
+                android:name="phone"
+                app:argType="string" />
             <action
                 android:id="@+id/action_signUpInfoFragment_to_loginFragment"
-                app:destination="@id/loginFragment" />
+                app:destination="@id/loginAndHomeNavigation" />
             <action
                 android:id="@+id/action_signUpInfoFragment_to_signUpCerFragment"
                 app:destination="@id/signUpCerFragment" />
@@ -65,6 +48,15 @@
             <action
                 android:id="@+id/action_passwordCerFragment_to_passwordNewFragment"
                 app:destination="@id/passwordNewFragment" />
+            <action
+                android:id="@+id/action_passwordCerFragment_to_signUpInfoFragment"
+                app:destination="@id/signUpInfoFragment"
+                >
+                <argument
+                    android:name="phone"
+                    app:argType="string"
+                    />
+            </action>
         </fragment>
         <fragment
             android:id="@+id/passwordNewFragment"
@@ -72,8 +64,29 @@
             tools:layout="@layout/fragment_password_new">
             <action
                 android:id="@+id/action_passwordNewFragment_to_loginFragment"
-                app:destination="@id/loginFragment" />
+                app:destination="@id/loginAndHomeNavigation" />
         </fragment>
+    </navigation>
+    <navigation android:id="@+id/loginAndHomeNavigation"
+        app:startDestination="@id/loginFragment">
+        <fragment
+            android:id="@+id/loginFragment"
+            android:name="com.example.dpectrum.LoginFragment"
+            tools:layout="@layout/fragment_login">
+            <action
+                android:id="@+id/action_loginFragment_to_homeFragment"
+                app:destination="@id/homeFragment" />
+            <action
+                android:id="@+id/action_loginFragment_to_passwordCerFragment"
+                app:destination="@id/findPasswordNavigation" />
+            <action
+                android:id="@+id/action_loginFragment_to_signUpCerFragment"
+                app:destination="@id/signUpNavigation" />
+        </fragment>
+        <fragment
+            android:id="@+id/homeFragment"
+            android:name="com.example.dpectrum.HomeFragment"
+            tools:layout="@layout/fragment_home" />
     </navigation>
 
 </navigation>

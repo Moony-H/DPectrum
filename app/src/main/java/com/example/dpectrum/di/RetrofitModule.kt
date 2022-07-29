@@ -1,5 +1,8 @@
 package com.example.dpectrum.di
 
+import com.example.dpectrum.api.ContentService
+import com.example.dpectrum.api.LoginService
+import com.example.dpectrum.api.PasswordCertificationService
 import com.example.dpectrum.api.SignUpService
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
@@ -23,7 +26,7 @@ class RetrofitModule {
         val builder = OkHttpClient.Builder()
 
         return Retrofit.Builder()
-            .baseUrl("https://test.dpectrum.app/").addConverterFactory(GsonConverterFactory.create())
+            .baseUrl("https://test.dpectrum.app/v1/api/").addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .client(builder.build())
             .build()
@@ -33,5 +36,23 @@ class RetrofitModule {
     @Provides
     fun provideSignUpService(retrofit: Retrofit): SignUpService {
         return retrofit.create(SignUpService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideLoginService(retrofit: Retrofit): LoginService {
+        return retrofit.create(LoginService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideContentService(retrofit: Retrofit): ContentService {
+        return retrofit.create(ContentService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun providePasswordCertificationService(retrofit: Retrofit): PasswordCertificationService {
+        return retrofit.create(PasswordCertificationService::class.java)
     }
 }

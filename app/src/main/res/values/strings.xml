@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">DPectrum</string>
+    <string name="content_dynamic">dynamic</string>
 </resources>

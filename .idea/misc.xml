@@ -11,6 +11,8 @@
         <entry key="..\:/Users/moony/AndroidStudioProjects/DPectrum/app/src/main/res/drawable/menu_fragment_home.xml" value="0.1" />
         <entry key="..\:/Users/moony/AndroidStudioProjects/DPectrum/app/src/main/res/drawable/menu_fragment_home_home.xml" value="0.1675" />
         <entry key="..\:/Users/moony/AndroidStudioProjects/DPectrum/app/src/main/res/layout/activity_main.xml" value="0.12" />
+        <entry key="..\:/Users/moony/AndroidStudioProjects/DPectrum/app/src/main/res/layout/dialog_basic.xml" value="0.2" />
+        <entry key="..\:/Users/moony/AndroidStudioProjects/DPectrum/app/src/main/res/layout/dialog_confirm.xml" value="0.22215422276621788" />
         <entry key="..\:/Users/moony/AndroidStudioProjects/DPectrum/app/src/main/res/layout/fragment_forgot_password.xml" value="0.184375" />
         <entry key="..\:/Users/moony/AndroidStudioProjects/DPectrum/app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="..\:/Users/moony/AndroidStudioProjects/DPectrum/app/src/main/res/layout/fragment_home_chat.xml" value="0.15555555555555556" />
@@ -25,8 +27,10 @@
         <entry key="..\:/Users/moony/AndroidStudioProjects/DPectrum/app/src/main/res/layout/fragment_sign_up_info.xml" value="0.18541666666666667" />
         <entry key="..\:/Users/moony/AndroidStudioProjects/DPectrum/app/src/main/res/layout/fragment_splash.xml" value="0.184375" />
         <entry key="..\:/Users/moony/AndroidStudioProjects/DPectrum/app/src/main/res/layout/source_custom_confirm_edit_text.xml" value="0.15" />
+        <entry key="..\:/Users/moony/AndroidStudioProjects/DPectrum/app/src/main/res/layout/source_item_tutor_content.xml" value="0.18697916666666667" />
         <entry key="..\:/Users/moony/AndroidStudioProjects/DPectrum/app/src/main/res/menu/fragment_home_bottom_navigation_menu.xml" value="0.18854166666666666" />
         <entry key="..\:/Users/moony/AndroidStudioProjects/DPectrum/app/src/main/res/menu/menu_fragment_home_bottom_navigation.xml" value="0.18958333333333333" />
+        <entry key="..\:/Users/moony/AppData/Local/Android/Sdk/platforms/android-32/data/res/layout/simple_spinner_dropdown_item.xml" value="0.18697916666666667" />
       </map>
     </option>
   </component>

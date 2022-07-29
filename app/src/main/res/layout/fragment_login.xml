@@ -56,6 +56,8 @@
         app:custom_confirmEdittext_title="휴대폰 번호"
         app:custom_confirmEdittext_hint="아이디 입력"
         android:layout_marginTop="80dp"
+        android:inputType="number"
+        android:maxLength="11"
         />
 
     <com.example.dpectrum.customView.ConfirmEditText
@@ -68,6 +70,8 @@
         android:layout_marginTop="10dp"
         app:custom_confirmEdittext_title="비밀번호"
         app:custom_confirmEdittext_hint="비밀번호 입력"
+        android:inputType="textPassword"
+        android:maxLength="20"
         />
 
     <Button

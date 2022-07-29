@@ -1,16 +1,17 @@
 package com.example.dpectrum
 
+import android.app.Dialog
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.navigation.Navigation
 import com.example.dpectrum.data.SignUpBody
+import com.example.dpectrum.databinding.DialogBasicBinding
 import com.example.dpectrum.databinding.FragmentSignUpInfoBinding
 import com.example.dpectrum.tag.SignUpResponseTag
+import com.example.dpectrum.util.Util
 import com.example.dpectrum.viewmodels.SignUpViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -50,40 +51,21 @@ class SignUpInfoFragment: Fragment() {
         }
 
         binding.fragmentSignUpInfoSignUpButton.setOnClickListener {
-            val nameState=binding.fragmentSignUpInfoName.getConfirmState()
-            val schoolState=binding.fragmentSignUpInfoSchool.getConfirmState()
-            val passwordState=binding.fragmentSignUpInfoPassword.getConfirmState()
-            val passwordCerState=binding.fragmentSignUpInfoPasswordCer.getConfirmState()
-            if(!nameState){
-                binding.fragmentSignUpInfoName.setErrorMessage("이름을 입력해 주세요")
-            }else{
-                binding.fragmentSignUpInfoName.setErrorMessage("")
-            }
-            if(!schoolState){
-                binding.fragmentSignUpInfoSchool.setErrorMessage("학교를 입력해 주세요")
-            }else{
-                binding.fragmentSignUpInfoSchool.setErrorMessage("")
-            }
-            if(!passwordState){
-                binding.fragmentSignUpInfoPassword.setErrorMessage("비밀번호를 입력해 주세요")
-            }else{
-                binding.fragmentSignUpInfoPassword.setErrorMessage("")
-            }
-            if(!passwordCerState){
-                binding.fragmentSignUpInfoPasswordCer.setErrorMessage("비밀번호 확인을 입력해 주세요")
-            }else{
-                binding.fragmentSignUpInfoPasswordCer.setErrorMessage("")
-            }
 
-            if(nameState && schoolState && passwordState && passwordCerState){
-                val info=SignUpBody(
-                    binding.fragmentSignUpInfoPassword.getEdittextContent(),
-                    "123123",
-                    binding.fragmentSignUpInfoName.getEdittextContent(),
-                    binding.fragmentSignUpInfoSchool.getEdittextContent()
-                )
-                signUpViewModel.setMemberInfo(info)
-                signUpViewModel.signUp()
+            if(checkAllConfirmEditText()){
+                if(binding.fragmentSignUpInfoTermService.isChecked && binding.fragmentSignUpInfoTermPrivacy.isChecked){
+                    val info=SignUpBody(
+                        binding.fragmentSignUpInfoPassword.getEdittextContent(),
+                        signUpViewModel.memberInfo.value!!.phoneNumber,
+                        binding.fragmentSignUpInfoName.getEdittextContent(),
+                        binding.fragmentSignUpInfoSchool.getEdittextContent()
+                    )
+                    signUpViewModel.setMemberInfo(info)
+                    signUpViewModel.signUp()
+                }else{
+                    Util.openBasicDialog(context,layoutInflater,"안내","이용약관과 개인정보처리방침에\n 동의해 주세요")
+                }
+
             }
 
 
@@ -100,5 +82,59 @@ class SignUpInfoFragment: Fragment() {
 
     private val confirmEditTextCondition={string:String->
         string != ""
+    }
+
+
+
+    private fun checkAllConfirmEditText():Boolean {
+        val name = binding.fragmentSignUpInfoName
+        val school = binding.fragmentSignUpInfoSchool
+        val password = binding.fragmentSignUpInfoPassword
+        val passwordCer = binding.fragmentSignUpInfoPasswordCer
+
+        if (name.getEdittextContent() == "") {
+            name.setErrorMessage("이름을 입력해 주세요")
+            name.setConfirmState(false)
+        } else {
+            name.setErrorMessage("")
+            name.setConfirmState(true)
+        }
+
+        if (school.getEdittextContent() == "") {
+            school.setErrorMessage("학교를 입력해 주세요")
+            school.setConfirmState(false)
+        } else {
+            school.setErrorMessage("")
+            school.setConfirmState(true)
+        }
+
+        if (password.getEdittextContent() == "") {
+            password.setErrorMessage("비밀번호를 입력해 주세요")
+            password.setConfirmState(false)
+        } else if (!password.getEdittextContent()
+                .matches("""^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^+\-=])(?=\S+$).{8,20}$""".toRegex())
+
+        ) {
+            password.setErrorMessage("특문, 숫자포함 8자리 이상 입력해 주세요")
+            password.setConfirmState(false)
+        } else {
+            password.setErrorMessage("")
+            password.setConfirmState(true)
+        }
+
+        if (passwordCer.getEdittextContent() == "") {
+            passwordCer.setErrorMessage("비밀번호 확인을 입력해 주세요")
+            passwordCer.setConfirmState(false)
+        } else if (password.getEdittextContent() != passwordCer.getEdittextContent()) {
+
+            passwordCer.setErrorMessage("비밀번호가 일치하지 않습니다.")
+            passwordCer.setConfirmState(false)
+        } else {
+            passwordCer.setErrorMessage("")
+            passwordCer.setConfirmState(true)
+        }
+
+        return name.getConfirmState() && school.getConfirmState() && password.getConfirmState() && passwordCer.getConfirmState()
+
     }
 }
