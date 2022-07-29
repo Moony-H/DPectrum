@@ -8,11 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.navigation.Navigation
-import androidx.navigation.navGraphViewModels
 import com.example.dpectrum.data.SignUpBody
-import com.example.dpectrum.databinding.FragmentPasswordCertificationBinding
 import com.example.dpectrum.databinding.FragmentSignUpCertificationBinding
-import com.example.dpectrum.databinding.FragmentSignUpInfoBinding
 import com.example.dpectrum.viewmodels.SignUpViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -81,7 +78,7 @@ class SignUpCertificationFragment: Fragment(),View.OnClickListener {
                 if(cerButtonClicked){
                     if(binding.fragmentSignUpCerCerNumber.getEdittextContent()=="123123"){
                         Navigation.findNavController(binding.root).navigate(R.id.action_signUpCerFragment_to_signUpInfoFragment)
-                        signUpViewModel.setMemberInfo(SignUpBody("",binding.fragmentSignUpCerPhoneNumber.getEdittextContent(),"",""))
+                        signUpViewModel.setSignUpBody(SignUpBody("",binding.fragmentSignUpCerPhoneNumber.getEdittextContent(),"",""))
                     } else{
                         binding.fragmentSignUpCerCerNumber.setErrorMessage("인증번호가 올바르지 않습니다.")
                     }

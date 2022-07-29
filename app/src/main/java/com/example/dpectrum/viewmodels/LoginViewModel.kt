@@ -1,5 +1,6 @@
 package com.example.dpectrum.viewmodels
 
+import android.graphics.Bitmap
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -9,8 +10,10 @@ import com.example.dpectrum.R
 import com.example.dpectrum.data.ContentServiceRepository
 import com.example.dpectrum.data.LoginServiceRepository
 import com.example.dpectrum.data.TutorContent
+import com.example.dpectrum.other.SingleLiveData
 import com.example.dpectrum.tag.FragmentTag
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.lang.IllegalArgumentException
@@ -30,9 +33,9 @@ class LoginViewModel @Inject constructor(
     val allContents:LiveData<List<TutorContent>>
         get()=_allContents
 
-    private val _selectedContents=MutableLiveData<List<TutorContent>>()
-    val selectedContents:LiveData<List<TutorContent>>
-        get()=_selectedContents
+    private val _sortedContents=MutableLiveData<List<TutorContent>>()
+    val sortedContents:LiveData<List<TutorContent>>
+        get()=_sortedContents
 
 
     private val _currentPageTag=MutableLiveData<FragmentTag>()
@@ -40,13 +43,19 @@ class LoginViewModel @Inject constructor(
         get()=_currentPageTag
 
 
+    private val _selectedContents=SingleLiveData<TutorContent>()
+    val selectedContent:LiveData<TutorContent>
+        get()=_selectedContents
+
+    var photo:Bitmap?=null
+
     init {
         Log.d("LoginViewModel", "created")
     }
 
     fun login(password: String, phone: String) {
         Log.d("LoginViewModel", "login Start")
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.IO+coroutineExceptionHandler) {
             val response = loginServiceRepository.postLoginBody(password, phone)
 
             if (response.code() == 200) {
@@ -66,7 +75,7 @@ class LoginViewModel @Inject constructor(
     }
 
     fun getContents(){
-        viewModelScope.launch(Dispatchers.IO){
+        viewModelScope.launch(Dispatchers.IO+coroutineExceptionHandler){
             token.value?.let {
                 val response=contentServiceRepository.getContents("Bearer $it","0")
 
@@ -89,9 +98,14 @@ class LoginViewModel @Inject constructor(
 
     }
 
-    fun setSelectedContents(list:List<TutorContent>){
-        _selectedContents.value=list
+    fun setSortedContents(list:List<TutorContent>){
+        _sortedContents.value=list
     }
+
+    fun setSelectedContents(content: TutorContent){
+        _selectedContents.value=content
+    }
+
 
     fun setCurrentPage(menuItemId:Int):Boolean{
         val pageTag=getPageTag(menuItemId)
@@ -112,6 +126,12 @@ class LoginViewModel @Inject constructor(
             R.id.item_page_my->FragmentTag.FRAGMENT_HOME_MY
             else -> throw IllegalArgumentException("bottom navi view not found: fragment tag")
         }
+
+    }
+
+
+    private val coroutineExceptionHandler= CoroutineExceptionHandler{_, throwable->
+        throwable.printStackTrace()
 
     }
 

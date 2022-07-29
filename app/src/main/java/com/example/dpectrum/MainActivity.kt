@@ -20,7 +20,6 @@ class MainActivity:AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding=ActivityMainBinding.inflate(layoutInflater)
         setContentView(_binding.root)
-        //val navHostFragment=supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        //navController=navHostFragment.navController
+
     }
 }

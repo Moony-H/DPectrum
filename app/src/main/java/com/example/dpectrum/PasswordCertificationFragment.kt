@@ -5,11 +5,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.navigation.Navigation
 import androidx.navigation.navGraphViewModels
 import com.example.dpectrum.databinding.FragmentPasswordCertificationBinding
+import com.example.dpectrum.util.Util
 import com.example.dpectrum.viewmodels.PasswordViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,6 +30,32 @@ class PasswordCertificationFragment:Fragment(),View.OnClickListener {
         _binding= FragmentPasswordCertificationBinding.inflate(inflater,container,false)
         binding.fragmentPasswordCerCerButton.setOnClickListener(this)
         binding.fragmentPasswordCerNextButton.setOnClickListener(this)
+
+
+        passwordViewModel.token.observe(viewLifecycleOwner) {
+            if (it == "400 error") {
+                Util.openConfirmDialog(
+                    requireContext(),
+                    layoutInflater,
+                    "알림",
+                    "가입된 정보가 없습니다.\n회원가입하시겠습니까?",
+                    {
+                        val phone= binding.fragmentPasswordCerPhoneNumber.getEdittextContent()
+                        PasswordCertificationFragmentDirections.actionPasswordCerFragmentToSignUpInfoFragment(phone)
+                        Navigation.findNavController(binding.root).navigate(R.id.action_passwordCerFragment_to_signUpInfoFragment)
+
+                    },
+                ){dialog->
+                    dialog.dismiss()
+                }
+            }else if(it =="404 error"){
+                Toast.makeText(requireContext(),"서버가 불안정합니다. 잠시후 다시 시도해 주세요",Toast.LENGTH_SHORT).show()
+            }else{
+                passwordViewModel.token.removeObservers(viewLifecycleOwner)
+                Navigation.findNavController(binding.root).navigate(R.id.action_passwordCerFragment_to_passwordNewFragment)
+
+            }
+        }
 
         return binding.root
 
@@ -63,7 +91,7 @@ class PasswordCertificationFragment:Fragment(),View.OnClickListener {
                 }else if(binding.fragmentPasswordCerCerNumber.getEdittextContent()!="123123"){
                     binding.fragmentPasswordCerCerNumber.setErrorMessage("인증번호가 올바르지 않습니다.")
                 }else{
-                    Navigation.findNavController(binding.root).navigate(R.id.action_passwordCerFragment_to_passwordNewFragment)
+                    passwordViewModel.setToken(binding.fragmentPasswordCerPhoneNumber.getEdittextContent())
                 }
 
             }

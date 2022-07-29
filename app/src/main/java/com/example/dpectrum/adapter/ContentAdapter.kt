@@ -1,9 +1,11 @@
 package com.example.dpectrum.adapter
 
+import android.graphics.Bitmap
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.core.graphics.drawable.toBitmap
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -14,7 +16,7 @@ import com.example.dpectrum.data.TutorContent
 import com.example.dpectrum.databinding.SourceItemTutorContentBinding
 import com.example.dpectrum.util.Util
 
-class ContentAdapter(val onClick:(TutorContent)->Unit):
+class ContentAdapter(val onClick:(TutorContent,Bitmap)->Unit):
     ListAdapter<TutorContent, ContentAdapter.ViewHolder>(ContentDiffCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -38,7 +40,7 @@ class ContentAdapter(val onClick:(TutorContent)->Unit):
             binding.sourceItemTutorName.text=content.tutorName
             binding.sourceItemTutorSchool.text=content.tutorSchool
             binding.root.setOnClickListener{
-                onClick(content)
+                onClick(content,binding.sourceItemTutorImage.drawable.toBitmap())
             }
         }
     }

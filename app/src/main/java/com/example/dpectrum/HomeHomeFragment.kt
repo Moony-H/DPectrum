@@ -10,16 +10,13 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
-import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dpectrum.adapter.ContentAdapter
 import com.example.dpectrum.data.TutorContent
 import com.example.dpectrum.databinding.FragmentHomeHomeBinding
 import com.example.dpectrum.viewmodels.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.lifecycle.HiltViewModel
 
 @AndroidEntryPoint
 class HomeHomeFragment:Fragment() {
@@ -49,15 +46,18 @@ class HomeHomeFragment:Fragment() {
         schoolSpinner.adapter =ArrayAdapter(requireContext(), R.layout.simple_spinner_dropdown_item, items)
         bailiwickSpinner.onItemSelectedListener=listener
         schoolSpinner.onItemSelectedListener=listener
-        adapter=ContentAdapter{
+        adapter=ContentAdapter{tutorContent,bitmap->
             Toast.makeText(requireContext(),"상세 이미지 페이지로 이동합니다.",Toast.LENGTH_SHORT).show()
+            viewModel.setSelectedContents(tutorContent)
+            viewModel.photo=bitmap
+
         }
 
         binding.fragmentHomeHomeRecycler.layoutManager=LinearLayoutManager(requireContext())
         binding.fragmentHomeHomeRecycler.adapter=adapter
 
 
-        viewModel.selectedContents.observe(viewLifecycleOwner){
+        viewModel.sortedContents.observe(viewLifecycleOwner){
             Log.d("HomeHomeFragment","observe selectedContents: $it")
             adapter.submitList(it)
         }
@@ -79,13 +79,13 @@ class HomeHomeFragment:Fragment() {
         override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
             val selected= mutableListOf<TutorContent>()
             if(position==0){
-                viewModel.allContents.value?.let { viewModel.setSelectedContents(it) }
+                viewModel.allContents.value?.let { viewModel.setSortedContents(it) }
             }else{
                 viewModel.allContents.value?.forEach {
                     if(it.tutorDepartment==items[position])
                         selected.add(it)
                 }
-                viewModel.setSelectedContents(selected)
+                viewModel.setSortedContents(selected)
             }
 
         }

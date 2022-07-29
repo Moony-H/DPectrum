@@ -1,3 +1,4 @@
+
 package com.example.dpectrum
 
 import android.os.Bundle
@@ -11,6 +12,7 @@ import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
+import androidx.navigation.Navigation
 import com.example.dpectrum.databinding.FragmentHomeBinding
 import com.example.dpectrum.tag.FragmentTag
 import com.example.dpectrum.viewmodels.LoginViewModel
@@ -49,6 +51,9 @@ class HomeFragment: Fragment() {
             binding.fragmentHomeBottomNavigationView.selectedItemId
             changeFragment(it)
 
+        }
+        loginViewModel.selectedContent.observe(viewLifecycleOwner){
+            Navigation.findNavController(binding.root).navigate(R.id.action_homeFragment_to_homeDetailFragment)
         }
 
         childFragmentManager.commit {
@@ -118,3 +123,5 @@ class HomeFragment: Fragment() {
     }
 
 }
+
+

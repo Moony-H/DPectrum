@@ -5,12 +5,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.dpectrum.api.SignUpService
-import com.example.dpectrum.data.MemberInfo
 import com.example.dpectrum.data.SignUpBody
 import com.example.dpectrum.data.SignUpServiceRepository
 import com.example.dpectrum.tag.SignUpResponseTag
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -26,11 +25,11 @@ class SignUpViewModel @Inject constructor(private val signUpServiceRepository: S
     val signUpResponseTag:LiveData<SignUpResponseTag>
         get()=_signUpResponseTag
 
-    fun setMemberInfo(signUpBody: SignUpBody){
+    fun setSignUpBody(signUpBody: SignUpBody){
         _memberInfo.value=signUpBody
     }
     fun signUp(){
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.IO+coroutineExceptionHandler) {
             memberInfo.value?.let {info->
                 val response=signUpServiceRepository.postSignUpBody(info)
                 Log.d("test","response Body: ${response.body()}")
@@ -55,5 +54,10 @@ class SignUpViewModel @Inject constructor(private val signUpServiceRepository: S
             }
 
         }
+    }
+
+    private val coroutineExceptionHandler= CoroutineExceptionHandler{_, throwable->
+        throwable.printStackTrace()
+
     }
 }

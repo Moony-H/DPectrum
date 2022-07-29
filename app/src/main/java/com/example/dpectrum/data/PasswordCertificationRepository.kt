@@ -10,4 +10,7 @@ class PasswordCertificationRepository @Inject constructor(private val passwordCe
     suspend fun getPasswordCerToken(phone:String):Response<CertificateToken>{
         return passwordCertificationService.certificatePhone(phone)
     }
+    suspend fun changePassword(token:String,password:String):Response<PasswordChangeResponse>{
+        return passwordCertificationService.changePassword(token,password)
+    }
 }

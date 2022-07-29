@@ -1,14 +1,13 @@
 package com.example.dpectrum
 
-import android.app.Dialog
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.navArgs
 import com.example.dpectrum.data.SignUpBody
-import com.example.dpectrum.databinding.DialogBasicBinding
 import com.example.dpectrum.databinding.FragmentSignUpInfoBinding
 import com.example.dpectrum.tag.SignUpResponseTag
 import com.example.dpectrum.util.Util
@@ -20,6 +19,9 @@ class SignUpInfoFragment: Fragment() {
     private var _binding: FragmentSignUpInfoBinding?=null
     private val binding: FragmentSignUpInfoBinding
         get()=_binding!!
+
+    private val args: SignUpInfoFragmentArgs by navArgs()
+
 
     private val signUpViewModel:SignUpViewModel by hiltNavGraphViewModels(R.id.signUpNavigation)
 
@@ -37,6 +39,15 @@ class SignUpInfoFragment: Fragment() {
         toolbar.setNavigationOnClickListener {
             Navigation.findNavController(binding.root).navigate(R.id.action_signUpInfoFragment_to_signUpCerFragment)
         }
+
+        //args
+        val info=SignUpBody(
+            "",
+            args.phone,
+            "",
+            ""
+        )
+        signUpViewModel.setSignUpBody(info)
 
         binding.fragmentSignUpInfoName.setEdittextContentErrorCondition(confirmEditTextCondition)
         binding.fragmentSignUpInfoSchool.setEdittextContentErrorCondition(confirmEditTextCondition)
@@ -60,7 +71,7 @@ class SignUpInfoFragment: Fragment() {
                         binding.fragmentSignUpInfoName.getEdittextContent(),
                         binding.fragmentSignUpInfoSchool.getEdittextContent()
                     )
-                    signUpViewModel.setMemberInfo(info)
+                    signUpViewModel.setSignUpBody(info)
                     signUpViewModel.signUp()
                 }else{
                     Util.openBasicDialog(context,layoutInflater,"안내","이용약관과 개인정보처리방침에\n 동의해 주세요")
