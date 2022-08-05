@@ -108,8 +108,8 @@ class LoginViewModel @Inject constructor(
 
 
     fun setCurrentPage(menuItemId:Int):Boolean{
-        val pageTag=getPageTag(menuItemId)
-        changeCurrentPage(pageTag)
+        //val pageTag=getPageTag(menuItemId)
+        //changeCurrentPage(pageTag)
         return true
     }
     private fun changeCurrentPage(pageType: FragmentTag) {

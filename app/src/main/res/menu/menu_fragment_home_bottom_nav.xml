@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/home_homeFragment"
+        android:icon="@drawable/menu_fragment_home_home"
+        android:title="홈"
+        />
+    <item
+        android:id="@+id/home_tutorFragment"
+        android:icon="@drawable/menu_fragment_home_tutor"
+        android:title="튜터"
+        />
+    <item
+        android:id="@+id/home_chatFragment"
+        android:enabled="true"
+        android:icon="@drawable/menu_fragment_home_chat"
+        android:title="채팅"
+        />
+    <item
+        android:id="@+id/home_myFragment"
+        android:enabled="true"
+        android:icon="@drawable/menu_fragment_home_my"
+        android:title="마이"
+        />
+
+</menu>

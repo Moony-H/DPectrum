@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_bottom_nav_view">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_bottom_nav_view"
+    app:startDestination="@id/home_homeFragment">
+    <fragment
+        android:id="@+id/home_homeFragment"
+        android:name="com.example.dpectrum.HomeHomeFragment"
+        tools:layout="@layout/fragment_home_home"
+        />
+    <fragment
+        android:id="@+id/home_tutorFragment"
+        android:name="com.example.dpectrum.HomeTutorFragment"
+        tools:layout="@layout/fragment_home_tutor"
+        />
+    <fragment
+        android:id="@+id/home_chatFragment"
+        android:name="com.example.dpectrum.HomeChatFragment"
+        tools:layout="@layout/fragment_home_chat"
+        />
+    <fragment
+        android:id="@+id/home_myFragment"
+        android:name="com.example.dpectrum.HomeMyFragment"
+        tools:layout="@layout/fragment_home_my"
+        />
 
 </navigation>
