@@ -44,10 +44,10 @@ class HomeFragment: Fragment() {
         loginViewModel.getContents()
 
         //네비게이션이 클릭되면 클릭된 버튼의 Id를 저장해 놓는다.
-        //binding.fragmentHomeBottomNavigationView.setOnItemSelectedListener {
-        //    Log.d("HomeFragment","Bottom navi view clicked: $it")
-        //    loginViewModel.setCurrentPage(it.itemId)
-        //}
+        binding.fragmentHomeBottomNavigationView.setOnItemSelectedListener {
+            Log.d("HomeFragment","Bottom navi view clicked: $it")
+            loginViewModel.setCurrentPage(it.itemId)
+        }
 
 
         //호스트를 찾아서 nav controller를 넣기
@@ -58,13 +58,16 @@ class HomeFragment: Fragment() {
         }?:run{
             Log.e("HomeFragment","nav fragment not found")
         }
-
-
+        binding.fragmentHomeBottomNavigationView.setOnItemSelectedListener {
+            Log.d("test","fragment changed")
+            loginViewModel.setCurrentPage(it.itemId)
+        }
 
         //저장된 id를 관찰하여, id가 바뀌면(사용자가 클릭하면) Fragment를 전환한다.
         loginViewModel.currentPageTag.observe(viewLifecycleOwner){ it ->
             binding.fragmentHomeBottomNavigationView.selectedItemId
-            //changeFragment(it)
+
+            changeFragment(it)
 
         }
         loginViewModel.selectedContent.observe(viewLifecycleOwner){
@@ -94,35 +97,35 @@ class HomeFragment: Fragment() {
         _binding=null
     }
 
-    //private fun changeFragment(tags: FragmentTag){
-//
-    //    childFragmentManager.commit {
-//
-    //        //사용자가 원하는 Fragment를 tag로 받고, 그것이 존재하는지 찾는다.
-    //        var targetFragment=childFragmentManager.findFragmentByTag(tags.fragmentTag)
-//
-    //        targetFragment?:run{
-    //            //Fragment add
-    //            targetFragment=createFragment(tags)
-    //            add(R.id.fragment_home_fragment_container,targetFragment!!,tags.fragmentTag)
-    //        }
-//
-    //        //단순히 show, hide로 사용자가 원하는 Fragment만 보이게 만든다.
-    //        show(targetFragment!!)
-//
-    //        //filterNot으로 show 한 Fragment(사용자가 요청한 Fragment)만 건너 뛰고, 나머지 Fragment들은 hide 한다.
-    //        FragmentTag.values()
-    //            .filterNot { it==tags }
-    //            .forEach { type->
-    //                childFragmentManager.findFragmentByTag(type.fragmentTag)?.let{
-    //                    hide(it)
-    //                }
-    //            }
-//
-    //    }
-//
-//
-    //}
+    private fun changeFragment(tags: FragmentTag){
+
+        childFragmentManager.commit {
+
+            //사용자가 원하는 Fragment를 tag로 받고, 그것이 존재하는지 찾는다.
+            var targetFragment=childFragmentManager.findFragmentByTag(tags.fragmentTag)
+
+            targetFragment?:run{
+                //Fragment add
+                targetFragment=createFragment(tags)
+                add(R.id.fragment_home_fragment_container,targetFragment!!,tags.fragmentTag)
+            }
+
+            //단순히 show, hide로 사용자가 원하는 Fragment만 보이게 만든다.
+            show(targetFragment!!)
+
+            //filterNot으로 show 한 Fragment(사용자가 요청한 Fragment)만 건너 뛰고, 나머지 Fragment들은 hide 한다.
+            FragmentTag.values()
+                .filterNot { it==tags }
+                .forEach { type->
+                    childFragmentManager.findFragmentByTag(type.fragmentTag)?.let{
+                        hide(it)
+                    }
+                }
+
+        }
+
+
+    }
 
     private fun createFragment(tags:FragmentTag):Fragment{
         return when(tags){

@@ -38,7 +38,7 @@ class LoginViewModel @Inject constructor(
         get()=_sortedContents
 
 
-    private val _currentPageTag=MutableLiveData<FragmentTag>()
+    private val _currentPageTag=MutableLiveData(FragmentTag.FRAGMENT_HOME_HOME)
     val currentPageTag:LiveData<FragmentTag>
         get()=_currentPageTag
 
@@ -108,8 +108,8 @@ class LoginViewModel @Inject constructor(
 
 
     fun setCurrentPage(menuItemId:Int):Boolean{
-        //val pageTag=getPageTag(menuItemId)
-        //changeCurrentPage(pageTag)
+        val pageTag=getPageTag(menuItemId)
+        changeCurrentPage(pageTag)
         return true
     }
     private fun changeCurrentPage(pageType: FragmentTag) {
